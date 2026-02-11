@@ -7,7 +7,10 @@ app.use(cors());
 app.use(express.json());
 
 // 🔴 PASTE YOUR MONGODB URL HERE
-mongoose.connect("mongodb+srv://scotty:scotty123@cluster0.ahe7o9c.mongodb.net/?appName=Cluster0");
+mongoose.connect("mongodb+srv://scotty:scotty123@cluster0.ahe7o9c.mongodb.net/?appName=Cluster0", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 app.get("/", (req,res)=>res.send("API running"));
 
