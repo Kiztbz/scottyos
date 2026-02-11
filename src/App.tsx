@@ -155,10 +155,26 @@ const addVehicle = async () => {
     setVehicles(vehicles.map(v => v.id === selectedVehicle.id ? { ...v, status: "ACTIVE" } : v));
   };
 
-  const endRental = (rental: any) => {
-    setRentals(rentals.map(r => r.id === rental.id ? { ...r, status: "COMPLETED" } : r));
-    setVehicles(vehicles.map(v => v.id === rental.vehicleId ? { ...v, status: "AVAILABLE" } : v));
-  };
+  const endRental = async (rental: any) => {
+  await fetch("/api/rentals", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id: rental._id }),
+  });
+
+  setRentals(prev =>
+    prev.map(r =>
+      r._id === rental._id ? { ...r, status: "COMPLETED" } : r
+    )
+  );
+  setVehicles(prev =>
+  prev.map(v =>
+    v.id === rental.vehicleId ? { ...v, status: "AVAILABLE" } : v
+  )
+);
+
+};
+
 
   // ---------------- UI ----------------
 

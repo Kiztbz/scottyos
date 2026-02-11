@@ -39,6 +39,19 @@ export default async function handler(req: any, res: any) {
             return res.status(200).json(rental);
         }
 
+        // 🔴 END RENTAL HERE
+        if (req.method === "PUT") {
+            const { id } = req.body;
+
+            const updated = await Rental.findByIdAndUpdate(
+                id,
+                { status: "COMPLETED" },
+                { new: true }
+            );
+
+            return res.status(200).json(updated);
+        }
+
     } catch (err: any) {
         return res.status(500).json({ error: err.message });
     }
