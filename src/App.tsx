@@ -167,11 +167,10 @@ const addVehicle = async () => {
       r._id === rental._id ? { ...r, status: "COMPLETED" } : r
     )
   );
-  setVehicles(prev =>
-  prev.map(v =>
-    v.id === rental.vehicleId ? { ...v, status: "AVAILABLE" } : v
-  )
-);
+  setVehicles(vehicles.map(v =>
+  v._id === selectedVehicle._id ? { ...v, status: "ACTIVE" } : v
+));
+
 
 };
 
@@ -195,19 +194,37 @@ const addVehicle = async () => {
         <div>
           <h2>Start Rental</h2>
 
-          <select onChange={e => setSelectedVehicle(vehicles.find(v => v.id === e.target.value))} style={styles.input}>
-            <option>Select Vehicle</option>
-            {vehicles.filter(v => v.status === "AVAILABLE").map(v => (
-              <option key={v.id} value={v.id}>{v.vehicleNumber}</option>
-            ))}
-          </select>
+          <select
+  onChange={(e) =>
+    setSelectedVehicle(vehicles.find(v => v._id === e.target.value))
+  }
+  style={styles.input}
+>
+  <option value="">Select Vehicle</option>
+  {vehicles
+    .filter(v => v.status === "AVAILABLE")
+    .map(v => (
+      <option key={v._id} value={v._id}>
+        {v.vehicleNumber}
+      </option>
+    ))}
+</select>
 
-          <select onChange={e => setSelectedCustomer(customers.find(c => c.id === e.target.value))} style={styles.input}>
-            <option>Select Customer</option>
-            {customers.map(c => (
-              <option key={c.id} value={c.id}>{c.username}</option>
-            ))}
-          </select>
+
+          <select
+  onChange={(e) =>
+    setSelectedCustomer(customers.find(c => c._id === e.target.value))
+  }
+  style={styles.input}
+>
+  <option value="">Select Customer</option>
+  {customers.map(c => (
+    <option key={c._id} value={c._id}>
+      {c.username}
+    </option>
+  ))}
+</select>
+
 
           <select onChange={e => setMode(e.target.value)} style={styles.input}>
             <option value="FREE">Free Mode</option>
