@@ -1,4 +1,4 @@
-import { connectDB } from "./db";
+import { connectDB } from "./db.js";
 import mongoose from "mongoose";
 
 const Customer = mongoose.models.Customer || mongoose.model("Customer", new mongoose.Schema({

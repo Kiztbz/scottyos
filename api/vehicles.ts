@@ -1,4 +1,4 @@
-import { connectDB } from "./db";
+import { connectDB } from "./db.js";
 import mongoose from "mongoose";
 
 const Vehicle = mongoose.models.Vehicle || mongoose.model("Vehicle", new mongoose.Schema({
