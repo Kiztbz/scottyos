@@ -56,11 +56,20 @@ export default function ScottyOSDashboard() {
 
   // ---------------- LOAD DATA FROM MONGODB ----------------
 
-  useEffect(() => {
-    fetch(API + "/vehicles").then(res => res.json()).then(setVehicles);
-    fetch(API + "/customers").then(res => res.json()).then(setCustomers);
-    fetch(API + "/rentals").then(res => res.json()).then(setRentals);
-  }, []);
+ useEffect(() => {
+  fetch(API + "/vehicles")
+    .then(res => res.json())
+    .then(data => setVehicles(data));
+
+  fetch(API + "/customers")
+    .then(res => res.json())
+    .then(data => setCustomers(data));
+
+  fetch(API + "/rentals")
+    .then(res => res.json())
+    .then(data => setRentals(data));
+}, []);
+
 
   // ---------------- BILLING ENGINE ----------------
 
