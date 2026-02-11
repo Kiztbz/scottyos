@@ -3,11 +3,13 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 const app = express();
-app.use(cors());
+app.use(cors());  
 app.use(express.json());
 
 // 🔴 PASTE YOUR MONGODB URL HERE
 mongoose.connect("mongodb+srv://scotty:scotty123@cluster0.ahe7o9c.mongodb.net/?appName=Cluster0");
+
+app.get("/", (req,res)=>res.send("API running"));
 
 const Vehicle = mongoose.model("Vehicle", new mongoose.Schema({
   vehicleNumber: String,

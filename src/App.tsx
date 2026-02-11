@@ -189,7 +189,18 @@ export default function ScottyOSDashboard() {
           )}
 
           <button onClick={startRental} style={styles.primaryBtn}>Start Rental</button>
+          <h2>Active Rentals</h2>
+          {rentals.filter(r => r.status === "ACTIVE").map(r => (
+            <div key={r.id} style={styles.card}>
+              <b>{r.vehicleNumber}</b>
+              <p>User: {r.username}</p>
+              <p>Mode: {r.mode}</p>
+              <p>Billing: ₹{r.billing}</p>
+              <button onClick={() => endRental(r)} style={styles.dangerBtn}>End Rental</button>
+            </div>
+          ))}
         </div>
+        
       )}
 
       {/* ACTIVE */}
@@ -248,11 +259,11 @@ export default function ScottyOSDashboard() {
 const styles = {
   container: { padding: 30, fontFamily: "Inter, sans-serif", minHeight: "100vh" },
   lockScreen: { height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#111827" },
-  card: { background: "white", padding: 20, borderRadius: 10, marginBottom: 10, boxShadow: "0 4px 12px rgba(0,0,0,0.08)" },
+  card: { background: "#111827", padding: 20, borderRadius: 10, marginBottom: 10, boxShadow: "0 4px 12px rgba(0,0,0,0.08)" },
   input: { display: "block", marginBottom: 10, padding: 10, width: "300px" },
   primaryBtn: { padding: 10, background: "#111827", color: "white", border: "none", marginTop: 5 },
   dangerBtn: { padding: 10, background: "#b91c1c", color: "white", border: "none", marginTop: 5 },
   tabs: { marginBottom: 20 },
-  tab: { marginRight: 10, padding: 10, background: "#e5e7eb", border: "none" },
+  tab: { marginRight: 10, padding: 10,  border: "none" },
   activeTab: { marginRight: 10, padding: 10, background: "#111827", color: "white", border: "none" },
 };
