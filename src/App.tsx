@@ -107,18 +107,23 @@ export default function ScottyOSDashboard() {
 
   // ---------------- ACTIONS ----------------
 
-  const addVehicle = async () => {
-    const newVehicle = createVehicle(vehicleForm.vehicleNumber, vehicleForm.model, vehicleForm.color);
+const addVehicle = async () => {
+  const newVehicle = createVehicle(
+    vehicleForm.vehicleNumber,
+    vehicleForm.model,
+    vehicleForm.color
+  );
 
-    await fetch(API + "/vehicles", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newVehicle),
-    });
+  const res = await fetch(API + "/vehicles", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newVehicle),
+  });
 
-    setVehicles([...vehicles, newVehicle]);
-    setVehicleForm({ vehicleNumber: "", model: "", color: "" });
-  };
+  const savedVehicle = await res.json();
+  setVehicles(prev => [...prev, savedVehicle]);
+};
+
 
   const addCustomer = async () => {
     if (!customerForm.dl) return alert("Driving license required");
