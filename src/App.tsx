@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 // Backend API
-const API = "https://scotty-api.onrender.com";
+const API = "/api";
 
 // ---------------- DATA MODELS ----------------
 
